@@ -71,7 +71,9 @@ const ChatScreen = ({ route }) => {
           {item.message}
         </Text>
         <Text
-          className={`text-xs ${myMessage ? "text-white" : "text-slate-700"}`}
+          className={`text-xs ${
+            myMessage ? "text-white self-end" : "text-slate-700"
+          }`}
         >
           {item.createdAt?.toDate().toLocaleDateString()}
         </Text>
