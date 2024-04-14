@@ -2,7 +2,6 @@ import {
   View,
   Pressable,
   ScrollView,
-  TouchableOpacity,
   Text,
   ActivityIndicator,
 } from "react-native";
@@ -12,7 +11,7 @@ import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { FIREBASE_DB } from "../../firebase";
 import { useSelector } from "react-redux";
 
-const GroupChats = () => {
+const GroupChats = ({ navigation }) => {
   const [groupsCollectionRef, setGroupsCollectionRef] = useState(null);
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -52,18 +51,21 @@ const GroupChats = () => {
     <View className="w-screen h-screen pt-16">
       <ScrollView>
         {groups.map((group) => (
-          <View
+          <Pressable
+            onPress={() =>
+              navigation.navigate("ChatScreen", {
+                group,
+              })
+            }
             key={group.id}
             className="w-full bg-white p-4 mb-2"
             style={{
               elevation: 4,
             }}
           >
-            <TouchableOpacity>
-              <Text>{group.name}</Text>
-              <Text>{group.description}</Text>
-            </TouchableOpacity>
-          </View>
+            <Text>{group.name}</Text>
+            <Text>{group.description}</Text>
+          </Pressable>
         ))}
       </ScrollView>
       <Pressable

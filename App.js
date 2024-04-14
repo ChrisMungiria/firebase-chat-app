@@ -21,6 +21,7 @@ import Profile from "./screens/protected/Profile";
 
 // Icons
 import { Ionicons } from "@expo/vector-icons";
+import ChatScreen from "./screens/protected/ChatScreen";
 
 function ProtectedStack() {
   const Tab = createBottomTabNavigator();
@@ -28,8 +29,8 @@ function ProtectedStack() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="GroupChats"
-        component={GroupChats}
+        name="ChatStack"
+        component={ChatStack}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
@@ -79,6 +80,23 @@ function Main() {
     <NavigationContainer>
       {user ? <ProtectedStack /> : <AuthStack />}
     </NavigationContainer>
+  );
+}
+
+function ChatStack() {
+  const Stack = createStackNavigator();
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="GroupChats"
+        component={GroupChats}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
+    </Stack.Navigator>
   );
 }
 
